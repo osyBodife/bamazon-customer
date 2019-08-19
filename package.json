@@ -3,17 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "bamazoncustomers.js",
+  "dependencies": {
+    "inquirer": "^6.5.1",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "ok"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/osyBodife/bamazon-customers.git"
   },
-  "keywords": [
-    "mysql_assignment"
-  ],
-  "author": "osy odife",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/osyBodife/bamazon-customers/issues"

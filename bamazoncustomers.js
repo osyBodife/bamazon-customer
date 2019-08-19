@@ -1,3 +1,5 @@
+var mysql = require("mysql");
+var inquirer = require("inquirer");
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -19,8 +21,8 @@ connection.connect(function (err) {
     connection.end();
 });
 
-/*
-function buyproduct() {
+
+function buyProducts() {
     // query the database for all items being auctioned
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
@@ -62,31 +64,7 @@ function buyproduct() {
                     }
                 }
 
-                // determine if bid was high enough
-                if (chosenItem.highest_bid < parseInt(answer.bid)) {
-                    // bid was high enough, so update db, let the user know, and start over
-                    connection.query(
-                        "UPDATE auctions SET ? WHERE ?",
-                        [
-                            {
-                                highest_bid: answer.bid
-                            },
-                            {
-                                id: chosenItem.id
-                            }
-                        ],
-                        function (error) {
-                            if (error) throw err;
-                            console.log("Bid placed successfully!");
-                            start();
-                        }
-                    );
-                }
-                else {
-                    // bid wasn't high enough, so apologize and start over
-                    console.log("Your bid was too low. Try again...");
-                    start();
-                }
+                
             });
     });
 }
