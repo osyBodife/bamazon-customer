@@ -14,12 +14,21 @@ var connection = mysql.createConnection({
     password: "Internet@922",
     database: "bamazon"
 });
-
+/*
 connection.connect(function (err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId);
     connection.end();
 });
+*/
+
+checkStock=function(qty,item_id){
+//select qty from db
+//if inputQty>dbQty...stop sales
+//else sell and update db
+
+}
+
 
 
 function buyProducts() {
@@ -36,9 +45,10 @@ function buyProducts() {
                         var productArray = [];
                         for (var i = 0; i < results.length; i++) {
                             //choiceArray.push(results[i].product_name);
-                            productArray.push(results[i].product_name);
+                            productArray.push(results[i].item_id + ":" + results[i].product_name);
+                            //productArray.push(results[i].product_name);
                         }
-                        console.log(productArray);
+                        //console.log(productArray);
                         return productArray;
                     },
                     message: "Select the ID of the product you would like to buy?"
@@ -49,7 +59,9 @@ function buyProducts() {
                     message: "Enter the quanity you want to buy?",
                     validate: function (value) {
                         if (isNaN(value) === false) {
+                            
                             return true;
+                            
                         }
                         return false;
                     }
@@ -57,15 +69,27 @@ function buyProducts() {
             ])
             .then(function (answer) {
                 // get the information of the chosen item
-                var chosenItem;
+                //console.log(answer.qty);
+                console.log(answer.qty);
+                console.log(answer.product_name);
+                
+                var str = answer.product_name;
+                var selectedItem= str.split(":");
+                console.log(selectedItem);
+                let item_id=selectedItem[0];
+                let item_name= selectedItem[1];
+                //call checkstock function
+
+                
+                /*
                 for (var i = 0; i < results.length; i++) {
-                    if (results[i].item_name === answer.choice) {
-                        chosenItem = results[i];
+                    if (results[i].item_id === answer.choices) {
+                        selectedItem= results[i];
                     }
                 }
-
+*/
                 
             });
     });
 }
-*/
+buyProducts();
