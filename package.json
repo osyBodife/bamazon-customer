@@ -1,0 +1,22 @@
+{
+  "name": "bamazon-customers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bamazoncustomers.js",
+  "scripts": {
+    "test": "ok"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osyBodife/bamazon-customers.git"
+  },
+  "keywords": [
+    "mysql_assignment"
+  ],
+  "author": "osy odife",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osyBodife/bamazon-customers/issues"
+  },
+  "homepage": "https://github.com/osyBodife/bamazon-customers#readme"
+}
