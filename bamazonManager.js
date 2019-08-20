@@ -27,11 +27,177 @@ connection.connect(function (err) {
 //add new product
 //use switch and call the functions within the switch
 let request;
+
+function viewProductsOnsale() {
+    //select all products and render results
+    var query = connection.query("SELECT * FROM products ", function (err, res) {
+        if (err) throw err;
+        console.log("item_id" + "|" + "Product" + "|" + "Dept" + "|" + "Price" + "|" + "StockQty")
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].dept_name + " | " + res[i].price + "|" + res[i].stock_qty);
+            //console.log(res[i].item_id + " | " + res[i].stock_qty + " | " + res[i].price + " | " + res[i].product_name);
+        }
+        // logs the actual query being run
+        console.log(query.sql);
+
+    });
+}
+
+
+
+
+
+
+function viewLowInventory() {
+
+    var query = connection.query("SELECT * FROM products WHERE stock_qty <5", function (err, res) {
+        if (err) throw err;
+        console.log("item_id" + "|" + "Product" + "|" + "Dept" + "|" + "Price" + "|" + "StockQty")
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].dept_name + " | " + res[i].price + "|" + res[i].stock_qty);
+            //console.log(res[i].item_id + " | " + res[i].stock_qty + " | " + res[i].price + " | " + res[i].product_name);
+        }
+        // logs the actual query being run
+        console.log(query.sql);
+
+    });
+
+}
+
+
+//create a function that updates stock
+function updateProduct(current_stock, selectedItem_id) {
+    console.log("Updating Stock position after the purchase...\n");
+    var query = connection.query(
+        "UPDATE products SET ? WHERE ?",
+        [
+            {
+                stock_qty: current_stock
+            },
+            {
+                item_id: selectedItem_id
+            }
+        ],
+        function (err, res) {
+            console.log(res.affectedRows + " product updated!\n");
+            // Call deleteProduct AFTER the UPDATE completes
+
+        }
+    );
+
+    // logs the actual query being run
+    console.log(query.sql);
+}
+
+addToStock = function (qty, selectedItem_id, callback) {
+    //select qty from db
+    //make a function with callback()
+    //genre=?", ["Dance"], function(err, res) {
+    var query = connection.query("SELECT * FROM products WHERE item_id=?", [selectedItem_id], function (err, res) {
+        if (err) throw err;
+
+        let dbQty = res[0].stock_qty;        
+       
+            //update db stock with the purchase
+            let current_stock = dbQty + qty;
+            //call stock update function
+            updateProduct(current_stock, selectedItem_id);
+            callback();
+
+
+
+        // logs the actual query being run
+        console.log(query.sql);
+
+    });
+
+}
+
+
+//create functions that renders db position after each purchase activity
+callback = function () {
+    //select all products and render results
+    var query = connection.query("SELECT * FROM products ", function (err, res) {
+        if (err) throw err;
+        console.log("item_id" + "|" + "Product" + "|" + "Dept" + "|" + "Price" + "|" + "StockQty")
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].dept_name + " | " + res[i].price + "|" + res[i].stock_qty);
+            //console.log(res[i].item_id + " | " + res[i].stock_qty + " | " + res[i].price + " | " + res[i].product_name);
+        }
+        // logs the actual query being run
+        console.log(query.sql);
+
+    });
+}
+
+
+
+function addToInventory() {
+    // query the database for all items being auctioned
+    connection.query("SELECT * FROM products", function (err, results) {
+        if (err) throw err;
+        // once you have the items, prompt the user for which they'd like to bid on
+        inquirer
+            .prompt([
+                {
+                    name: "product_name",
+                    type: "list",
+                    choices: function () {
+                        var productArray = [];
+                        for (var i = 0; i < results.length; i++) {
+                            //choiceArray.push(results[i].product_name);
+                            //productArray.push(results[i].item_id + ":" + results[i].product_name);
+                            productArray.push(results[i].item_id + ":" + results[i].product_name);
+                            //productArray.push(results[i].product_name);
+                        }
+                        //console.log(productArray);
+                        return productArray;
+                    },
+                    message: "Select the product you would like to update the inventory?"
+                },
+                {
+                    name: "qty",
+                    type: "input",
+                    message: "Enter the stock quanity you want to add to the inventory?",
+                    validate: function (value) {
+                        if (isNaN(value) === false) {
+
+                            return true;
+
+                        }
+                        return false;
+                    }
+                }
+            ])
+            .then(function (answer) {
+                // get the information of the chosen item
+                
+                qty = answer.qty;
+                console.log(answer.product_name);
+                var str = answer.product_name;
+                var selectedItem = str.split(":");
+                console.log(selectedItem);
+                let selectedItem_id = selectedItem[0];
+                let item_name = selectedItem[1];
+
+
+                //call update function
+                //use callback function to display after update
+                addToStock(qty, selectedItem_id, callback);
+
+
+            });
+    });
+}
+
+
+
+
 function doManagersModule(request) {
-    
+
     switch (request) {
         case "View Products for sale":
-            viewProductsOnsale(); 
+            viewProductsOnsale();
             break;
 
         case "View Low Inventory":
@@ -63,16 +229,16 @@ function managerModule() {
                     name: "selectedActivity",
                     type: "list",
 
-                    choices:["View Products for sale", 
-                              "View Low Inventory",
-                            "Add to Inventory", "Add New Product"],                
-                    
+                    choices: ["View Products for sale",
+                        "View Low Inventory",
+                        "Add to Inventory", "Add New Product"],
+
                     message: "Select current transaction activity"
                 },
-                
+
             ])
             .then(function (answer) {
-                let request=answer.selectedActivity;
+                let request = answer.selectedActivity;
                 console.log(request);
                 //call the switch function
                 doManagersModule(request);
