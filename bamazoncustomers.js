@@ -21,15 +21,80 @@ connection.connect(function (err) {
     connection.end();
 });
 */
-
-checkStock = function (qty, item_id) {
+let price;
+let qty;
+checkStock = function (qty, selectedItem_id) {
     //select qty from db
     //if inputQty>dbQty...stop sales
     //else sell and update db
+    //make a function with callback()
+    //genre=?", ["Dance"], function(err, res) {
+    var query = connection.query("SELECT * FROM products WHERE item_id=?",[selectedItem_id] ,function (err, res) {
+        if (err) throw err;
+        // for (var i = 0; i < res.length; i++) {
+        //     console.log(res[i].item_id + " | " + res[i].stock_qty + " | " + res[i].price + " | " + res[i].product_name);
+        // }
+        let dbQty=res[0].stock_qty;
+        let price=res[0].price;
+        //console.log("Qty available : " + dbQty);
+        if(qty <= dbQty){
+            // process purchase
+            
+            console.log(`Your purchase of ${qty} units of ${res[0].product_name} was successfully`);
+            //update db stock with the purchase
+            let current_stock= dbQty-qty;
+            //call stock update function
+            updateProduct(current_stock, selectedItem_id);
+
+
+        }else{
+            //
+            console.log("Insufficient quantity");
+        }
+
+        // logs the actual query being run
+        console.log(query.sql);
+
+    });
 
 }
 
 
+function updateProduct(current_stock,selectedItem_id) {
+    console.log("Updating Stock position after the purchase...\n");
+    var query = connection.query(
+        "UPDATE products SET ? WHERE ?",
+        [
+            {
+                stock_qty: current_stock
+            },
+            {
+                item_id: selectedItem_id
+            }
+        ],
+        function (err, res) {
+            console.log(res.affectedRows + " products updated!\n");
+            // Call deleteProduct AFTER the UPDATE completes
+            
+        }
+    );
+
+    // logs the actual query being run
+    console.log(query.sql);
+}
+
+
+
+
+
+callback = function () {
+    //select all products and render results
+
+
+
+    
+
+}
 
 function buyProducts() {
     // query the database for all items being auctioned
@@ -72,23 +137,19 @@ function buyProducts() {
                 // get the information of the chosen item
                 //console.log(answer.qty);
                 console.log(answer.qty);
+                qty = answer.qty;
                 console.log(answer.product_name);
-
                 var str = answer.product_name;
                 var selectedItem = str.split(":");
                 console.log(selectedItem);
-                let item_id = selectedItem[0];
+                let selectedItem_id = selectedItem[0];
                 let item_name = selectedItem[1];
+
+
                 //call checkstock function
-
-
-                /*
-                for (var i = 0; i < results.length; i++) {
-                    if (results[i].item_id === answer.choices) {
-                        selectedItem= results[i];
-                    }
-                }
-*/
+                
+                checkStock(qty,selectedItem_id);
+               
 
             });
     });
