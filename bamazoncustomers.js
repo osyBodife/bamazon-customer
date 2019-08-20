@@ -23,31 +23,31 @@ connection.connect(function (err) {
 */
 let price;
 let qty;
-checkStock = function (qty, selectedItem_id) {
+checkStock = function (qty, selectedItem_id,callback) {
     //select qty from db
     //if inputQty>dbQty...stop sales
     //else sell and update db
     //make a function with callback()
     //genre=?", ["Dance"], function(err, res) {
-    var query = connection.query("SELECT * FROM products WHERE item_id=?",[selectedItem_id] ,function (err, res) {
+    var query = connection.query("SELECT * FROM products WHERE item_id=?", [selectedItem_id], function (err, res) {
         if (err) throw err;
-        // for (var i = 0; i < res.length; i++) {
-        //     console.log(res[i].item_id + " | " + res[i].stock_qty + " | " + res[i].price + " | " + res[i].product_name);
-        // }
-        let dbQty=res[0].stock_qty;
-        let price=res[0].price;
+       
+        let dbQty = res[0].stock_qty;
+        let price = res[0].price;
         //console.log("Qty available : " + dbQty);
-        if(qty <= dbQty){
+        if (qty <= dbQty) {
             // process purchase
-            
+
             console.log(`Your purchase of ${qty} units of ${res[0].product_name} was successfully`);
+            calculateCost(qty, price);
             //update db stock with the purchase
-            let current_stock= dbQty-qty;
+            let current_stock = dbQty - qty;
             //call stock update function
             updateProduct(current_stock, selectedItem_id);
+            callback();
 
 
-        }else{
+        } else {
             //
             console.log("Insufficient quantity");
         }
@@ -58,9 +58,12 @@ checkStock = function (qty, selectedItem_id) {
     });
 
 }
+function calculateCost(qty,price){
+    let cost=qty*price;
+    console.log("The cost of this purchase is :" + cost);
+}
 
-
-function updateProduct(current_stock,selectedItem_id) {
+function updateProduct(current_stock, selectedItem_id) {
     console.log("Updating Stock position after the purchase...\n");
     var query = connection.query(
         "UPDATE products SET ? WHERE ?",
@@ -73,9 +76,9 @@ function updateProduct(current_stock,selectedItem_id) {
             }
         ],
         function (err, res) {
-            console.log(res.affectedRows + " products updated!\n");
+            console.log(res.affectedRows + " product updated!\n");
             // Call deleteProduct AFTER the UPDATE completes
-            
+
         }
     );
 
@@ -89,11 +92,17 @@ function updateProduct(current_stock,selectedItem_id) {
 
 callback = function () {
     //select all products and render results
+    var query = connection.query("SELECT * FROM products ", function (err, res) {
+        if (err) throw err;
+        console.log("item_id" + "|" + "Product"+ "|" + "Dept" + "|" +"Price"+ "|" +"StockQty")
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].dept_name + " | " + res[i].price + "|" +res[i].stock_qty);
+            //console.log(res[i].item_id + " | " + res[i].stock_qty + " | " + res[i].price + " | " + res[i].product_name);
+        }
+        // logs the actual query being run
+        console.log(query.sql);
 
-
-
-    
-
+    });
 }
 
 function buyProducts() {
@@ -147,9 +156,9 @@ function buyProducts() {
 
 
                 //call checkstock function
-                
-                checkStock(qty,selectedItem_id);
-               
+
+                checkStock(qty, selectedItem_id,callback);
+
 
             });
     });
