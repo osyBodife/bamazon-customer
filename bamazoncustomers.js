@@ -22,10 +22,10 @@ connection.connect(function (err) {
 });
 */
 
-checkStock=function(qty,item_id){
-//select qty from db
-//if inputQty>dbQty...stop sales
-//else sell and update db
+checkStock = function (qty, item_id) {
+    //select qty from db
+    //if inputQty>dbQty...stop sales
+    //else sell and update db
 
 }
 
@@ -45,7 +45,8 @@ function buyProducts() {
                         var productArray = [];
                         for (var i = 0; i < results.length; i++) {
                             //choiceArray.push(results[i].product_name);
-                            productArray.push(results[i].item_id + ":" + results[i].product_name);
+                            //productArray.push(results[i].item_id + ":" + results[i].product_name);
+                            productArray.push(results[i].item_id + ":" + results[i].product_name + ":" + results[i].price);
                             //productArray.push(results[i].product_name);
                         }
                         //console.log(productArray);
@@ -59,9 +60,9 @@ function buyProducts() {
                     message: "Enter the quanity you want to buy?",
                     validate: function (value) {
                         if (isNaN(value) === false) {
-                            
+
                             return true;
-                            
+
                         }
                         return false;
                     }
@@ -72,15 +73,15 @@ function buyProducts() {
                 //console.log(answer.qty);
                 console.log(answer.qty);
                 console.log(answer.product_name);
-                
+
                 var str = answer.product_name;
-                var selectedItem= str.split(":");
+                var selectedItem = str.split(":");
                 console.log(selectedItem);
-                let item_id=selectedItem[0];
-                let item_name= selectedItem[1];
+                let item_id = selectedItem[0];
+                let item_name = selectedItem[1];
                 //call checkstock function
 
-                
+
                 /*
                 for (var i = 0; i < results.length; i++) {
                     if (results[i].item_id === answer.choices) {
@@ -88,7 +89,7 @@ function buyProducts() {
                     }
                 }
 */
-                
+
             });
     });
 }
