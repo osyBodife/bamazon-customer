@@ -131,8 +131,13 @@ callback = function () {
     });
 }
 
-function insertProduct(){
-    var query = connection.query("SELECT * FROM products ", function (err, res) {
+
+// INSERT INTO bamazon.products(product_name, dept_name, price, stock_qty)
+// VALUES("Timberland PRO Men\'s Steel-Toe Shoe", "Fashion", 99.99, 60);
+
+function insertProduct(product_name, dept_name, price, stock_qty) {
+    var sql = "INSERT INTO bamazon.products(product_name, dept_name, price, stock_qty) VALUES('product_name', 'dept_name', price , stock_qty)";
+    var query = connection.query(sql, function (err, res) {
         if (err) throw err;
 
     });
@@ -234,7 +239,7 @@ function addNewProduct() {
         .prompt([
             {
                 name: "item_name",
-                type: "input",  
+                type: "input",
                 message: "Enter the name of product you want to add to the store"
                 // validate: function (value) {                    
                 //     if (typeof value === string) {
@@ -283,13 +288,15 @@ function addNewProduct() {
 
         ])
         .then(function (answer) {
-            let product_name = answer.item_name;
-            let stock_qty = answer.item_qty;
-            let dept = answer.item_dept;
-            let price = answer.item_price;
-            console.log(product_name);
-            console.log (price);
+            let valu1 = answer.item_name;
+            let valu2 = answer.item_dept;
+            let valu3 = answer.item_price;
+            let valu4 = answer.item_qty;
+
+            console.log(valu1);
+            console.log(valu2);
             //call insert function
+            insertProduct(valu1, valu2, valu3, valu4);
 
 
         });
