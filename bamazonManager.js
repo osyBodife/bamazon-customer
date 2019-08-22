@@ -67,7 +67,7 @@ function viewLowInventory() {
 
 //create a function that updates stock
 function updateProduct(current_stock, selectedItem_id) {
-    console.log("Updating Stock position after the purchase...\n");
+    console.log("Updating Stock position with ...\n");
     var query = connection.query(
         "UPDATE products SET ? WHERE ?",
         [
@@ -96,13 +96,14 @@ addToStock = function (qty, selectedItem_id, callback) {
     var query = connection.query("SELECT * FROM products WHERE item_id=?", [selectedItem_id], function (err, res) {
         if (err) throw err;
 
-        let dbQty = res[0].stock_qty;        
-       
-            //update db stock with the purchase
-            let current_stock = dbQty + qty;
-            //call stock update function
-            updateProduct(current_stock, selectedItem_id);
-            callback();
+        let dbQty = parseInt(res[0].stock_qty);
+        console.log("old stock qty : " + dbQty);
+
+        //update db stock with the purchase
+        let current_stock = dbQty + qty;
+        //call stock update function
+        updateProduct(current_stock, selectedItem_id);
+        callback();
 
 
 
@@ -130,6 +131,12 @@ callback = function () {
     });
 }
 
+function insertProduct(){
+    var query = connection.query("SELECT * FROM products ", function (err, res) {
+        if (err) throw err;
+
+    });
+}
 
 
 function addToInventory() {
@@ -171,8 +178,9 @@ function addToInventory() {
             ])
             .then(function (answer) {
                 // get the information of the chosen item
-                
-                qty = answer.qty;
+
+                qty = parseInt(answer.qty);
+                console.log("Qty to be added : " + qty);
                 console.log(answer.product_name);
                 var str = answer.product_name;
                 var selectedItem = str.split(":");
@@ -217,6 +225,80 @@ function doManagersModule(request) {
             break;
     }
 }
+
+
+function addNewProduct() {
+
+    // once you have the items, prompt the user for which they'd like to bid on
+    inquirer
+        .prompt([
+            {
+                name: "item_name",
+                type: "input",  
+                message: "Enter the name of product you want to add to the store"
+                // validate: function (value) {                    
+                //     if (typeof value === string) {
+                //       return true;
+                //  } else {
+                //        return false;
+                //     }
+
+                // },
+
+            },
+            {
+                name: "item_qty",
+                type: "input",
+                message: "Enter the stock quanity you want to add to the inventory?",
+                validate: function (value) {
+                    if (isNaN(value) === false) {
+
+                        return true;
+
+                    }
+                    return false;
+                }
+            },
+
+            {
+                name: "item_price",
+                type: "input",
+                message: "Enter the price of the item",
+                validate: function (value) {
+                    if (isNaN(value) === false) {
+
+                        return true;
+
+                    }
+                    return false;
+                }
+            },
+
+            {
+                name: "item_dept",
+                type: "input",
+                message: "Which department does the product belong to?"
+            },
+
+
+        ])
+        .then(function (answer) {
+            let product_name = answer.item_name;
+            let stock_qty = answer.item_qty;
+            let dept = answer.item_dept;
+            let price = answer.item_price;
+            console.log(product_name);
+            console.log (price);
+            //call insert function
+
+
+        });
+
+}
+
+
+
+
 
 function managerModule() {
     // query the database for all items being auctioned
