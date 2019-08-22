@@ -16,3 +16,5 @@ The Following technologies were used to developed the Application
 
 ### Sample of Transaction Activities
 # Customer Module
+The Store prompts the user to select product based on what is available on DB
+<img src="assets/images/customer_prompt_select_product_01.png ">
