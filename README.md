@@ -21,4 +21,4 @@ The Store prompts the user to select product based on what is available on DB
 
 <br>
 
-![Philadelphia's Magic Gardens. This place was so cool!](/assets/images/customer_prompt_select_product_01.png"Philadelphia's Magic Gardens")
+!["Image"](assets/images/customer_prompt_select_product_01.png "Philadelphia's Magic Gardens")
