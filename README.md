@@ -22,3 +22,6 @@ a. The Store prompts the user to select product based on what is available on DB
 
 b. customers makes a select of product with ID of 3
 !["Image"](assets/images/customer_select_03.png "customer makes a selection")
+
+c. Purchased Confirmed and Db updated
+!["Image"](assets/images/purchase_confirmed.png "purchase confirmed")
