@@ -25,3 +25,6 @@ b. customers makes a select of product with ID of 3
 
 c. Purchased Confirmed and Db updated
 !["Image"](assets/images/purchase_confirmed.png "purchase confirmed")
+
+d. Cost of Purchase Computed and displayed
+!["Image"](assets/images/cost_of_purchase.png "cost of purchase confirmed")
