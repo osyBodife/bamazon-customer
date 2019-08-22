@@ -36,7 +36,9 @@ e. Customer selects more quantity is available in db
 
 f. Updating Transactions in the Database
   i. image 1 Database Bafore the transaction
+  <br>
   !["Image"](assets/images/database_before.jpg "database before")
   <br>
   ii. image 2 Database Bafore after the transaction
+  <br>
   !["Image"](assets/images/database_after.jpg "database after")
