@@ -29,3 +29,7 @@ c. Purchased Confirmed and Db updated
 d. Cost of Purchase Computed and displayed
 <br>
 !["Image"](assets/images/cost_of_purchase.png "cost of purchase confirmed")
+
+e. Customer selects more quantity is available in db
+<br>
+!["Image"](assets/images/insufficient_qty.png "insufficient quantity")
