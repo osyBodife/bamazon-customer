@@ -27,4 +27,5 @@ c. Purchased Confirmed and Db updated
 !["Image"](assets/images/purchase_confirmed.png "purchase confirmed")
 
 d. Cost of Purchase Computed and displayed
+<br>
 !["Image"](assets/images/cost_of_purchase.png "cost of purchase confirmed")
