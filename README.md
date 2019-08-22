@@ -16,9 +16,9 @@ The Following technologies were used to developed the Application
 
 ### Sample of Transaction Activities
 # Customer Module
-The Store prompts the user to select product based on what is available on DB
-<img src="assets/images/customer_prompt_select_product_01.png ">
+a. The Store prompts the user to select product based on what is available on DB
 
-<br>
+!["Image"](assets/images/customer_prompt_select_product_01.png "customer prompt image")
 
-!["Image"](assets/images/customer_prompt_select_product_01.png "Philadelphia's Magic Gardens")
+b. customers makes a select of product with ID of 3
+!["Image"](assets/images/customer_select_03.png "customer makes a selection")
