@@ -33,3 +33,10 @@ d. Cost of Purchase Computed and displayed
 e. Customer selects more quantity is available in db
 <br>
 !["Image"](assets/images/insufficient_qty.png "insufficient quantity")
+
+f. Updating Transactions in the Database
+  i. image 1 Database Bafore the transaction
+  !["Image"](assets/images/database_before.jpg "database before")
+  <br>
+  ii. image 2 Database Bafore after the transaction
+  !["Image"](assets/images/database_after.jpg "database after")
