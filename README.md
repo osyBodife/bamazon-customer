@@ -60,8 +60,8 @@ f. Updating Transactions in the Database
 3. Add to Inventory( this will update stock position)
 <img src="assets/images/manager_module_add_inventory.png" atl="inventory module">
 4. Add New Product Module
-<img src="assets/images/manager_add_new_product_module" atl="add new product">
+<img src="assets/images/manager_add_new_product_module.png" atl="add new product">
  i. Initiate Operation
- <img src="assets/images/manager_add_operation_01" atl="add operation">
+ <img src="assets/images/manager_add_operation_01.png" atl="add operation">
 
 
