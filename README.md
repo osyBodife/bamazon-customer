@@ -46,14 +46,16 @@ f. Updating Transactions in the Database
   ii. image 2 Database after the transaction
   <br>
   !["Image"](assets/images/database_after.jpg "database after")
-  
+  <br>
  
   ## Manager Module  
-  ### Manager Acivity Options  
+  ### Manager Acivity Options
+  
 !["Image"](assets/images/manager_module_options.png "manager options")
 1. View Products on Sale
 <br>
 !["Image"](assets/images/manager_module_view_products_onsale.png "manager options")
+
 2. View Low Inventory
 <br>
 !["Image"](assets/images/manager_module_view_low_inventory.png "manager options")
