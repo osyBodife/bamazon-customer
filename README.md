@@ -26,7 +26,7 @@ a. The Store prompts the user to select product based on what is available on DB
 b. customers makes a select of product with ID of 3
 !["Image"](assets/images/customer_select_03.png "customer makes a selection")
 
-c. Purchased Confirmed and Db updated
+c. Purchase Confirmed and Db updated
 !["Image"](assets/images/purchase_confirmed.png "purchase confirmed")
 
 d. Cost of Purchase Computed and displayed
@@ -57,4 +57,11 @@ f. Updating Transactions in the Database
 
 2. View Low Inventory
 <img src="assets/images/manager_module_view_low_inventory.png" atl="view low inventory">
+3. Add to Inventory( this will update stock position)
+<img src="assets/images/manager_module_add_inventory.png" atl="inventory module">
+4. Add New Product Module
+<img src="assets/images/manager_add_new_product_module" atl="add new product">
+ i. Initiate Operation
+ <img src="assets/images/manager_add_operation_01" atl="add operation">
+
 
