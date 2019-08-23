@@ -6,9 +6,9 @@ The Following technologies were used to developed the Application
 3. Dependencies include;
     1. npm modules
     2. npm inquirer module
-    <br>
+    
     !["Image"](assets/images/dependencies_db_connection.png "db connection")
-    <br>
+   
 ## Currently the Application has two modules as follows;
 1. Customer Module
    1.This is designed to enable a customer buy things from tha App
