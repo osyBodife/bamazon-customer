@@ -47,13 +47,13 @@ f. Updating Transactions in the Database
   <br>
   !["Image"](assets/images/database_after.jpg "database after")
   <br>
-  <br>
+ 
   ## Manager Module
-  <br>
+  
   ### Manager Acivity Options
-  <br>
+  
 !["Image"](assets/images/manager_module_options.png "manager options")
-<br>
+
 1. View Products on Sale
 <br>
 !["Image"](assets/images/manager_module_view_products_onsale.png "manager options")
