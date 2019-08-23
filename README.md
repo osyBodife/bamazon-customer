@@ -11,11 +11,11 @@ The Following technologies were used to develop the Application
    
 ## Currently the Application has two modules, as follows;
 1. Customer Module
-   1. This was designed to enable a customer buy things from tha App
+   1. This was designed to enable a customer buy things from the App
    2. It can be accessed from node using bamazoncustomers.js
 2. Manager Module
    1. This module is accessed through bamazonManager.js file
-   2. It was designed to enable Manager add inventory, pull reports , add new products to store etc
+   2. It was designed to enable the Manager add inventory, pull reports , add new products to the store etc
 
 ### Sample of Transaction Activities
 # Customer Module
