@@ -63,5 +63,6 @@ f. Updating Transactions in the Database
 <img src="assets/images/manager_add_new_product_module.png" atl="add new product">
  i. Initiate Operation
  <img src="assets/images/manager_add_operation_01.png" atl="add operation">
-
+ ii Add New Product Db complete View
+<img src="assets/images/manager_add_operation_db_complete_view.png" atl="add db view">
 
