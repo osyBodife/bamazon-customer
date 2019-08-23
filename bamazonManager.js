@@ -30,7 +30,7 @@ let request;
 
 function viewProductsOnsale() {
     //select all products and render results
-    var query = connection.query("SELECT * FROM products ", function (err, res) {
+    var query = connection.query("SELECT * FROM products WHERE stock_qty!=0 ", function (err, res) {
         if (err) throw err;
         console.log("item_id" + "|" + "Product" + "|" + "Dept" + "|" + "Price" + "|" + "StockQty")
         for (var i = 0; i < res.length; i++) {
@@ -118,7 +118,7 @@ addToStock = function (qty, selectedItem_id, callback) {
 //create functions that renders db position after each purchase activity
 callback = function () {
     //select all products and render results
-    var query = connection.query("SELECT * FROM products ", function (err, res) {
+    var query = connection.query("SELECT * FROM products WHERE stock_qty!=0", function (err, res) {
         if (err) throw err;
         console.log("item_id" + "|" + "Product" + "|" + "Dept" + "|" + "Price" + "|" + "StockQty")
         for (var i = 0; i < res.length; i++) {
@@ -138,7 +138,12 @@ callback = function () {
 function insertProduct(product_name, dept_name, price, stock_qty) {    
     var sql = `INSERT INTO bamazon.products(product_name, dept_name, price, stock_qty) VALUES(?,?,?,?)`;
     var query = connection.query(sql,[product_name,dept_name, price,stock_qty], function (err, res) {
-        if (err) throw err;
+        if (err){
+            throw err;
+
+        } else{
+            console.log(`The operation to add ${stock_qty} units of ${product_name} was successfully`);
+        }
 
     });
 }
@@ -302,8 +307,8 @@ function addNewProduct() {
             let stock_qty = answer.item_qty;
 
             //call insert function
-            insertProduct(product_name, dept_name, price, stock_qty,callback);
-            //callback();
+            insertProduct(product_name, dept_name, price, stock_qty);
+            callback();
 
 
         });

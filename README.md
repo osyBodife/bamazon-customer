@@ -6,6 +6,9 @@ The Following technologies were used to developed the Application
 3. Dependencies include;
     1. npm modules
     2. npm inquirer module
+    <br>
+    !["Image"](assets/images/dependencies_db_connection.png "db connection")
+    <br>
 ##Currently the Application has two modules as follows;
 1. Customer Module
    1.This is designed to enable a customer buy things from tha App
@@ -43,3 +46,16 @@ f. Updating Transactions in the Database
   ii. image 2 Database after the transaction
   <br>
   !["Image"](assets/images/database_after.jpg "database after")
+  <br>
+  <br>
+  ##Manager Module
+  ###Manager Acivity Options
+  <br>
+!["Image"](assets/images/manager_module_options.png "manager options")
+<br>
+1. View Products on Sale
+<br>
+!["Image"](assets/images/manager_module_view_products_onsale.png "manager options")
+<br>
+2. View Low Inventory
+!["Image"](assets/images/manager_module_view_low_inventory.png "manager options")
