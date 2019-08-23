@@ -54,6 +54,7 @@ f. Updating Transactions in the Database
 !["Image"](assets/images/manager_module_options.png "manager options")
 1. View Products on Sale
 <br>
+<img src="assets/images/manager_module_view_products_onsale.png" atl="view products">
 !["Image"](assets/images/manager_module_view_products_onsale.png "manager options")
 
 2. View Low Inventory
