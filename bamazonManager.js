@@ -135,9 +135,9 @@ callback = function () {
 // INSERT INTO bamazon.products(product_name, dept_name, price, stock_qty)
 // VALUES("Timberland PRO Men\'s Steel-Toe Shoe", "Fashion", 99.99, 60);
 
-function insertProduct(product_name, dept_name, price, stock_qty) {
-    var sql = "INSERT INTO bamazon.products(product_name, dept_name, price, stock_qty) VALUES('product_name', 'dept_name', price , stock_qty)";
-    var query = connection.query(sql, function (err, res) {
+function insertProduct(product_name, dept_name, price, stock_qty) {    
+    var sql = `INSERT INTO bamazon.products(product_name, dept_name, price, stock_qty) VALUES(?,?,?,?)`;
+    var query = connection.query(sql,[product_name,dept_name, price,stock_qty], function (err, res) {
         if (err) throw err;
 
     });
@@ -240,15 +240,15 @@ function addNewProduct() {
             {
                 name: "item_name",
                 type: "input",
-                message: "Enter the name of product you want to add to the store"
-                // validate: function (value) {                    
-                //     if (typeof value === string) {
-                //       return true;
-                //  } else {
-                //        return false;
-                //     }
+                message: "Enter the name of product you want to add to the store",
+                validate: function (value) {                    
+                    if (typeof value === "string") {
+                      return true;
+                 } else {
+                       return false;
+                    }
 
-                // },
+                },
 
             },
             {
@@ -282,21 +282,28 @@ function addNewProduct() {
             {
                 name: "item_dept",
                 type: "input",
-                message: "Which department does the product belong to?"
+                message: "Which department does the product belong to?",
+                validate: function (value) {
+                    if (typeof value === "string") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+
+                },
             },
 
 
         ])
         .then(function (answer) {
-            let valu1 = answer.item_name;
-            let valu2 = answer.item_dept;
-            let valu3 = answer.item_price;
-            let valu4 = answer.item_qty;
+            let product_name = answer.item_name;
+            let dept_name = answer.item_dept;
+            let price = answer.item_price;
+            let stock_qty = answer.item_qty;
 
-            console.log(valu1);
-            console.log(valu2);
             //call insert function
-            insertProduct(valu1, valu2, valu3, valu4);
+            insertProduct(product_name, dept_name, price, stock_qty,callback);
+            //callback();
 
 
         });
