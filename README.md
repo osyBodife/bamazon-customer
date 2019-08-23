@@ -9,7 +9,7 @@ The Following technologies were used to developed the Application
     <br>
     !["Image"](assets/images/dependencies_db_connection.png "db connection")
     <br>
-##Currently the Application has two modules as follows;
+## Currently the Application has two modules as follows;
 1. Customer Module
    1.This is designed to enable a customer buy things from tha App
    2. It can be acces from node.js using bamazoncustomers.js
@@ -48,8 +48,9 @@ f. Updating Transactions in the Database
   !["Image"](assets/images/database_after.jpg "database after")
   <br>
   <br>
-  ##Manager Module
-  ###Manager Acivity Options
+  ## Manager Module
+  <br>
+  ### Manager Acivity Options
   <br>
 !["Image"](assets/images/manager_module_options.png "manager options")
 <br>
